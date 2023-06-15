@@ -6,15 +6,6 @@
 
 
 
-typedef void(__fastcall* _AttackTarget)(DWORD skill, DWORD monsteIndex);
-typedef void(__fastcall* _PacketSend)(uintptr_t deviceAddr, char packet[]);
-
-int AttackTarget(DWORD skill, DWORD monsterIndex) {
-    _AttackTarget attackTargetWithSkill = (_AttackTarget)(GetBaseAdress() + (long long)0x0000041B41);
-
-    attackTargetWithSkill(skill, monsterIndex);
-    return 1;
-}
 
 
 DWORD casstFuncAddr;
@@ -93,13 +84,3 @@ void GetByteArray(uintptr_t adress, char* outTable, int size)
     memcpy(outTable, reinterpret_cast<char*>(adress), size);
 }
 
-
-
-int SendPacketToServer(uintptr_t deviceAddr, char packet[])
-{
-    _PacketSend attackTargetWithSkill = (_PacketSend)(GetBaseAdress() + 0x268DC);
-
-    attackTargetWithSkill(deviceAddr, packet);
-
-    return 0; 
-}

@@ -2,9 +2,6 @@
 #include <Windows.h>
 #include <string>
 
-extern "C" {
-	__declspec(dllexport) int AttackTarget(DWORD skill, DWORD MonsterIndex);
-}
 
 
 extern "C" {
@@ -21,11 +18,6 @@ extern "C" {
 
 extern "C" {
 	__declspec(dllexport) float GetFloat(uintptr_t Adress);
-}
-
-
-extern "C" {
-	__declspec(dllexport) int SendPacketToServer(uintptr_t deviceAddr, char packet[]);
 }
 
 extern "C" {
