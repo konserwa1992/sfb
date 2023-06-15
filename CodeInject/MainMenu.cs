@@ -37,11 +37,11 @@ namespace CodeInject
         public static extern void GetByteArray(UInt64 adress, byte[] outTable, int size);
 
         [DllImport("ClrBootstrap.dll")]
-        public static extern void ActionCommand(int skill);
+        public static extern void ActionCommand(int actionId,uint targetID = 0xE0000000);
         #endregion
 
         int* playerState;
-
+        int previousState = 0;
         enum PlayerStates
         {
             CatchCommon=292,CatchUncommon = 293, CatchRare = 294, CatchEpic = 295,StandWithRod = 271, Unknow =0, Unknow2=273
@@ -56,28 +56,27 @@ namespace CodeInject
         private void timer1_Tick(object sender, EventArgs e)
         {
             label1.Text = $"STATE: {*playerState}";
-            if(*playerState == (int)PlayerStates.CatchCommon || *playerState == (int)PlayerStates.CatchUncommon || *playerState == (int)PlayerStates.CatchRare || *playerState == (int)PlayerStates.CatchEpic)
+
+            if ((previousState != *playerState) && (*playerState == (int)PlayerStates.CatchCommon || *playerState == (int)PlayerStates.CatchUncommon || *playerState == (int)PlayerStates.CatchRare || *playerState == (int)PlayerStates.CatchEpic))
             {
                 ActionCommand(0x128);//Catch fish command
+                string catchtype = *playerState == (int)PlayerStates.CatchCommon ? "Common" : "UnCommon";
+                listBox1.Items.Add($"{DateTime.Now.ToString()} Catch {catchtype}");
             }
-
-
-            //player standing
-            if (*playerState == 271 || *playerState == 0 || *playerState == 273)
+            else if (*playerState == 271 || *playerState == 0 || *playerState == 273)
             {
+                //player standing
                 ActionCommand(0x121); //Bait command
             }
+            previousState = *playerState;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            ActionCommand(0x121);
             timer1.Enabled = !timer1.Enabled;
             button1.Text = !timer1.Enabled ? "START" : "STOP";
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            ActionCommand(0x121);
-        }
     }
 }

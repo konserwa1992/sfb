@@ -8,9 +8,9 @@
 
 
 
-DWORD casstFuncAddr;
+DWORD castFuncAddr;
 
-void ActionCommand(int skill)
+void ActionCommand(int actionID,unsigned int targetID= 0xE0000000)
 {
     /*
     ffxiv.exe + 56AB93 - 6A 00 - push 00
@@ -27,7 +27,7 @@ void ActionCommand(int skill)
         */
 
     DWORD thisAddr = GetBaseAdress() + 0x16BBDC0;
-    casstFuncAddr = GetBaseAdress() + 0x805240;
+    castFuncAddr = GetBaseAdress() + 0x805240;
     __asm
     {
         push 0
@@ -35,11 +35,11 @@ void ActionCommand(int skill)
         push 0
         push 0
         push 0
-        push 0xE0000000
-        push skill
+        push targetID
+        push actionID
         push 01
         mov ecx, thisAddr
-        call casstFuncAddr
+        call castFuncAddr
     }
 }
 

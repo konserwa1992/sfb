@@ -35,6 +35,6 @@ extern "C" {
 }
 
 extern "C" {
-	__declspec(dllexport) void ActionCommand(int skill);
+	__declspec(dllexport) void ActionCommand(int skill,unsigned int targetID);
 }
 
