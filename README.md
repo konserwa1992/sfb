@@ -1,6 +1,6 @@
 Final Fantasy XIV SimpleFishBot.
 
-Work only with directX 9.0c version.
+Work only with directX 9.0c version, propably will work only on steam version.
 
 
 Instruction:
