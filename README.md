@@ -9,3 +9,4 @@ Instruction:
 3. Click Start in the bot menu.
 if character didnt start fishing click "Force Start"
 
+Thanks to: https://github.com/Glatrix/ClrHosting
