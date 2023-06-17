@@ -44,6 +44,7 @@ namespace CodeInject
         enum PlayerStates
         {
             CatchCommon=292,CatchUncommon = 293, CatchRare = 294, CatchEpic = 295,StandWithRod = 271, Unknow =0, Unknow2=273
+
         }
 
         public MainMenu()
@@ -60,7 +61,7 @@ namespace CodeInject
             {
                 ActionCommand(0x128);//Catch fish command
             }
-            else if (*playerState == 271 || *playerState == 0 || *playerState == 273)
+            else if (*playerState == (int)PlayerStates.StandWithRod || *playerState == (int)PlayerStates.Unknow || *playerState == (int)PlayerStates.Unknow2)
             {
                 //player standing
                 ActionCommand(0x121); //Bait command
