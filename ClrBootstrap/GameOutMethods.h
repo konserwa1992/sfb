@@ -34,7 +34,4 @@ extern "C" {
 	__declspec(dllexport) short GetShort(uintptr_t Adress);
 }
 
-extern "C" {
-	__declspec(dllexport) void ActionCommand(int skill,unsigned int targetID);
-}
 

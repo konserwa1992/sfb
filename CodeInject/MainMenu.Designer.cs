@@ -34,6 +34,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.chUseMooch = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -73,11 +74,22 @@
             this.pictureBox1.TabIndex = 3;
             this.pictureBox1.TabStop = false;
             // 
+            // chUseMooch
+            // 
+            this.chUseMooch.AutoSize = true;
+            this.chUseMooch.Location = new System.Drawing.Point(109, 17);
+            this.chUseMooch.Name = "chUseMooch";
+            this.chUseMooch.Size = new System.Drawing.Size(82, 19);
+            this.chUseMooch.TabIndex = 4;
+            this.chUseMooch.Text = "Use Mooch";
+            this.chUseMooch.UseVisualStyleBackColor = true;
+            // 
             // MainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(334, 234);
+            this.Controls.Add(this.chUseMooch);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button1);
@@ -98,5 +110,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.CheckBox chUseMooch;
     }
 }
