@@ -7,6 +7,5 @@ Instruction:
 1. Inject ClrBootstrap.dll(in that same folder you should have CodeInject.dll file) to ffxiv.exe.
 2. Choose your bait in game
 3. Click Start in the bot menu.
-if character didnt start fishing click "Force Start"
 
 Thanks to: https://github.com/Glatrix/ClrHosting
