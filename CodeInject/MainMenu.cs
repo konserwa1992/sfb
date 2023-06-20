@@ -58,8 +58,8 @@ namespace CodeInject
 
         public void ActionCommand(int actionId, uint targetID = 0xE0000000)
         {
-            CallAction delegateRecive = (CallAction)Marshal.GetDelegateForFunctionPointer(new IntPtr((long)(GetBaseAdress() + 0x805240)), typeof(CallAction));
-            delegateRecive((new IntPtr((long)(GetBaseAdress() + 0x16BBDC0)).ToPointer()), 1, actionId, targetID, 0, 0, 0, 0, 0);
+            CallAction delegateRecive = (CallAction)Marshal.GetDelegateForFunctionPointer(new IntPtr((long)(GetBaseAdress() + 0x8055C0)), typeof(CallAction));
+            delegateRecive((new IntPtr((long)(GetBaseAdress() + 0x16C3DD0)).ToPointer()), 1, actionId, targetID, 0, 0, 0, 0, 0);
         }
 
 
@@ -70,12 +70,17 @@ namespace CodeInject
 
         }
 
+        enum Action
+        {
+            Bait= 0x121,Hook=0x128,Mooch = 0x129,MakeShiftBait = 0x000068B5
+        }
+
         public MainMenu()
         {
             InitializeComponent();
 
 
-            playerState = (int*)(new IntPtr((long)(GetBaseAdress() + 0x1823320)).ToPointer());
+            playerState = (int*)(new IntPtr((long)(GetBaseAdress() + 0x182B3A0)).ToPointer());
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -84,17 +89,17 @@ namespace CodeInject
 
             if (*playerState == (int)PlayerStates.WeakBite || *playerState == (int)PlayerStates.StrongBite || *playerState == (int)PlayerStates.FerociousBite || *playerState == (int)PlayerStates.UnknowBite)
             {
-                ActionCommand(0x128);//Catch fish command
+                ActionCommand((int)Action.Hook);//Catch fish command
             }
             else if (*playerState == (int)PlayerStates.StandWithRod || *playerState == (int)PlayerStates.Unknow || *playerState == (int)PlayerStates.Unknow2)
             {
                 if(chUseMooch.Checked)
                 {
-                    ActionCommand(0x129);  
+                    ActionCommand((int)Action.Mooch);  
                 }
 
                 //player standing
-                ActionCommand(0x121); //Bait command
+                ActionCommand((int)Action.Bait); //Bait command
             }
         }
 
