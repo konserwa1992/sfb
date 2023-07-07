@@ -15,26 +15,26 @@ namespace CodeInject
     public unsafe partial class MainMenu : Form
     {
         #region externals
-        [DllImport("ClrBootstrap.dll")]
+        [DllImport("ClrBootstrapx64.dll")]
         public static extern UInt64 GetBaseAdress();
 
-        [DllImport("ClrBootstrap.dll")]
+        [DllImport("ClrBootstrapx64.dll")]
         public static extern UInt64 GetInt64(UInt64 Adress);
-        [DllImport("ClrBootstrap.dll")]
+        [DllImport("ClrBootstrapx64.dll")]
         public static extern int GetInt32(UInt64 Adress);
-        [DllImport("ClrBootstrap.dll")]
+        [DllImport("ClrBootstrapx64.dll")]
         public static extern float GetFloat(UInt64 Adress);
-        [DllImport("ClrBootstrap.dll")]
+        [DllImport("ClrBootstrapx64.dll")]
         public static extern int SendPacketToServer(UInt64 deviceAddr, byte[] packet);
 
-        [DllImport("ClrBootstrap.dll")]
+        [DllImport("ClrBootstrapx64.dll")]
         public static extern byte GetByte(UInt64 Adress);
 
 
-        [DllImport("ClrBootstrap.dll")]
+        [DllImport("ClrBootstrapx64.dll")]
         public static extern short GetShort(UInt64 Adress);
 
-        [DllImport("ClrBootstrap.dll")]
+        [DllImport("ClrBootstrapx64.dll")]
         public static extern void GetByteArray(UInt64 adress, byte[] outTable, int size);
         #endregion
 
