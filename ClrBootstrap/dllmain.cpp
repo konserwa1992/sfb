@@ -10,13 +10,18 @@
 #include "GameOutMethods.h"
 #pragma comment(lib, "mscoree.lib")
 
+#ifdef _WIN64
+#define dllName L"\\sfbx64.dll"
+#else
+#define dllName L"\\sfbx86.dll"
+#endif
+
+
 EXTERN_C IMAGE_DOS_HEADER __ImageBase;
 
-static const LPCWSTR Assembly = L"\\CodeInject.dll"; //dllname.dll (Needs To Start With '\\') (Can also be inside a folder, eg '\\Folder\\dllname.dll')
-static const LPCWSTR Class = L"ISpace.IClass"; //namespace.class
+static const LPCWSTR Assembly =  dllName; //dllname.dll (Needs To Start With '\\') (Can also be inside a folder, eg '\\Folder\\dllname.dll')
+static const LPCWSTR Class = L"sfb.Isfb"; //namespace.class
 static const LPCWSTR Method = L"IMain"; //method name
-static const LPCWSTR Param = L"It works!!"; //string paramaters
-
 
 
 
@@ -42,7 +47,7 @@ DWORD WINAPI Main()
                 if (runtimeHost->Start() == S_OK) 
                 {
                     DWORD pReturnValue;
-                    runtimeHost->ExecuteInDefaultAppDomain((LPWSTR)tempPath.c_str(), Class, Method, Param, &pReturnValue);
+                    runtimeHost->ExecuteInDefaultAppDomain((LPWSTR)tempPath.c_str(), Class, Method, NULL, &pReturnValue);
                     std::cout << (int)pReturnValue;
                     runtimeInfo->Release();
                     metaHost->Release();

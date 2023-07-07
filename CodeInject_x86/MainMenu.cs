@@ -39,23 +39,29 @@ namespace CodeInject
         #endregion
 
 
-   
-        unsafe delegate void CallActionx64(void* arg1, int arg2, int arg3, uint arg4, int arg5,
-                      int arg6, int arg7);
-        CallActionx64 callActionFuncx64;
         /*
-         * 7ff73fcc34a0  uint64_t sub_7ff73fcc34a0(void* arg1, int32_t arg2, int32_t arg3, int64_t arg4, int32_t arg5, 
-                      int32_t arg6, char* arg7)
-        */
+    ffxiv.exe + 56AB93 - 6A 00 - push 00
+    ffxiv.exe + 56AB95 - 6A 00 - push 00
+    ffxiv.exe + 56AB97 - 6A 00 - push 00
+    ffxiv.exe + 56AB99 - 6A 00 - push 00
+    ffxiv.exe + 56AB9B - E8 7090EBFF - call ffxiv.exe + 423C10
+    ffxiv.exe + 56ABA0 - 52 - push edx
+    ffxiv.exe + 56ABA1 - 50 - push eax
+    ffxiv.exe + 56ABA2 - 56 - push esi
+    ffxiv.exe + 56ABA3 - 6A 01 - push 01
+    ffxiv.exe + 56ABA5 - B9 C0BD5702 - mov ecx, ffxiv.exe + 16BBDC0
+    ffxiv.exe + 56ABAA - E8 91A62900 - call ffxiv.exe + 805240
+*/
+        [UnmanagedFunctionPointer(CallingConvention.ThisCall)]
+        unsafe delegate void CallActionx32(void* argThis, int arg0, int actionID, uint targetID, int arg3, int arg4, int arg5, int arg6, int arg7);
+        CallActionx32 callActionFuncx86;
 
 
-
-
-
-        public void ActionCommandx64(int actionId, uint targetId = 0xE0000000)
+        public void ActionCommandx86(int actionId, uint targetId = 0xE0000000)
         {
-            callActionFuncx64((new IntPtr((long)(GetBaseAdress() + 0x20e8990)).ToPointer()), 1, actionId, targetId, 0, 0, 0);
+            callActionFuncx86((new IntPtr((long)(GetBaseAdress() + 0x16C3DD0)).ToPointer()), 1, actionId, targetId, 0, 0, 0, 0, 0);
         }
+
 
         int* playerState;
         enum PlayerStates
@@ -72,11 +78,9 @@ namespace CodeInject
         public MainMenu()
         {
             InitializeComponent();
+            playerState = (int*)(new IntPtr((long)(GetBaseAdress() + 0x182B3A0)).ToPointer());
 
-            //x64
-            playerState = (int*)(new IntPtr((long)(GetBaseAdress() + 0x2167AA0)).ToPointer());
-           
-            callActionFuncx64 = (CallActionx64)Marshal.GetDelegateForFunctionPointer(new IntPtr((long)(GetBaseAdress() + 0x9b34a0)), typeof(CallActionx64));
+            callActionFuncx86 = (CallActionx32)Marshal.GetDelegateForFunctionPointer(new IntPtr((long)(GetBaseAdress() + 0x8055C0)), typeof(CallActionx32));
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -85,23 +89,23 @@ namespace CodeInject
 
             if (*playerState == (int)PlayerStates.WeakBite || *playerState == (int)PlayerStates.StrongBite || *playerState == (int)PlayerStates.FerociousBite || *playerState == (int)PlayerStates.UnknowBite)
             {
-                ActionCommandx64((int)Action.Hook);//Catch fish command
+                ActionCommandx86((int)Action.Hook);//Catch fish command
             }
             else if (*playerState == (int)PlayerStates.StandWithRod || *playerState == (int)PlayerStates.Unknow || *playerState == (int)PlayerStates.Unknow2)
             {
                 if(chUseMooch.Checked)
                 {
-                    ActionCommandx64((int)Action.Mooch);  
+                    ActionCommandx86((int)Action.Mooch);  
                 }
 
                 //player standing
-                ActionCommandx64((int)Action.Bait); //Bait command
+                ActionCommandx86((int)Action.Bait); //Bait command
             }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            ActionCommandx64(0x121);
+            ActionCommandx86(0x121);
            timer1.Enabled = !timer1.Enabled;
             button1.Text = !timer1.Enabled ? "START" : "STOP";
         }

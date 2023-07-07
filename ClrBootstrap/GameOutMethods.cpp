@@ -4,13 +4,18 @@
 #include <typeinfo>
 #include <string>
 
+#ifdef _WIN64
+    #define process L"ffxiv_dx11.exe"
+#else
+    #define process L"ffxiv.exe"
+#endif
 
 
 
 long long GetBaseAdress()
 {
     // return BaseAddres;
-    return (uintptr_t)GetModuleHandle(L"ffxiv.exe");
+    return (uintptr_t)GetModuleHandle(process);
 }
 
 
