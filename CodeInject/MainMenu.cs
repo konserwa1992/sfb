@@ -54,7 +54,8 @@ namespace CodeInject
 
         public void ActionCommandx64(int actionId, uint targetId = 0xE0000000)
         {
-            callActionFuncx64((new IntPtr((long)(GetBaseAdress() + 0x20e8990)).ToPointer()), 1, actionId, targetId, 0, 0, 0);
+            //this = 00007FF6497AFFCB | 48:8D0D 7E5AA701         | lea rcx,qword ptr ds:[7FF64B225A50]     |
+            callActionFuncx64((new IntPtr((long)(GetBaseAdress() + 0x20F5A50)).ToPointer()), 1, actionId, targetId, 0, 0, 0);
         }
 
         int* playerState;
@@ -74,9 +75,10 @@ namespace CodeInject
             InitializeComponent();
 
             //x64
-            playerState = (int*)(new IntPtr((long)(GetBaseAdress() + 0x2167AA0)).ToPointer());
-           
-            callActionFuncx64 = (CallActionx64)Marshal.GetDelegateForFunctionPointer(new IntPtr((long)(GetBaseAdress() + 0x9b34a0)), typeof(CallActionx64));
+            playerState = (int*)(new IntPtr((long)(GetBaseAdress() + 0x2174E20)).ToPointer());
+
+            //00007FF6497AFFF0 | E8 AB353300              | call ffxiv_dx11.7FF649AE35A0            |
+            callActionFuncx64 = (CallActionx64)Marshal.GetDelegateForFunctionPointer(new IntPtr((long)(GetBaseAdress() + 0x9B35A0)), typeof(CallActionx64));
         }
 
         private void timer1_Tick(object sender, EventArgs e)
