@@ -1,6 +1,6 @@
 Final Fantasy XIV SimpleFishBot.
 
-Work only with directX 11 version, propably will work only on steam version(07.07.2023).
+Work only with directX 11 version, propably will work only on steam version(19.07.2023).
 
 
 Instruction:
